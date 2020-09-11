@@ -1,0 +1,50 @@
+package p;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class h {
+
+	public static void main(String[] args) throws FileNotFoundException {
+
+        File file = new File("C:/Users/pitbull/Desktop/yq_in.txt");
+        if (file.isFile()) { // 检查导入的文件存不存在是否存在
+            System.out.println("File already exists");
+            System.out.println(file);
+        }
+        //输入
+        Scanner input = new Scanner(file);
+        ArrayList<String> pro= new ArrayList<String>();
+        ArrayList<String> city = new ArrayList<String>();
+        ArrayList<String> date = new ArrayList<String>();
+        while (input.hasNext()) {
+            pro.add(input.next());
+            city.add(input.next());
+            date.add(input.next());
+            //System.out.println(pro. + " " + city + " " + date);
+        }
+        for(int i=0; i < pro.size() ; i++){
+            System.out.println(pro.get(i) + " " + city.get(i) + " " + date.get(i));
+        }
+        //输出
+        FileOutputStream y = new FileOutputStream(new File("C:/Users/pitbull/Desktop/shuchu.txt"));
+        PrintStream a = new PrintStream(y);
+        String first = "";
+        int w = 0;
+        for(int i=0; i < pro.size() ; i++){
+        	
+            if((first.equals(pro.get(i))) != true) {
+            	if(w > 0) a.println();
+                first = pro.get(i);
+                a.println(first);
+                w++;
+            }
+            if(city.get(i).equals("待明确地区")) continue;
+            a.print(city.get(i)+" ");
+            a.println(date.get(i));
+        }
+
+        a.close();
+    }
+
+	}
+
